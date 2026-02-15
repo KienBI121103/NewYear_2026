@@ -1,0 +1,131 @@
+'use client';
+
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const YOUTUBE_VIDEO_ID = 'qDDFsYjmPsA'; // Vạn Sự Như Ý - Trúc Nhân
+
+export default function MusicPlayer() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isReady, setIsReady] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(true);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
+  const playerReadyRef = useRef(false);
+
+  // Dismiss tooltip after 5 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => setShowTooltip(false), 5000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Load YouTube IFrame API
+  useEffect(() => {
+    // We use a simple postMessage approach instead of full YT API
+    setIsReady(true);
+  }, []);
+
+  const sendCommand = useCallback((command: string) => {
+    if (iframeRef.current?.contentWindow) {
+      iframeRef.current.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: command, args: [] }),
+        '*'
+      );
+    }
+  }, []);
+
+  const toggleMusic = useCallback(() => {
+    if (isPlaying) {
+      sendCommand('pauseVideo');
+      setIsPlaying(false);
+    } else {
+      if (!playerReadyRef.current) {
+        playerReadyRef.current = true;
+        // First play: iframe will autoplay on load with enablejsapi
+        // We need to trigger play via postMessage
+        setTimeout(() => sendCommand('playVideo'), 500);
+      } else {
+        sendCommand('playVideo');
+      }
+      setIsPlaying(true);
+      setShowTooltip(false);
+    }
+  }, [isPlaying, sendCommand]);
+
+  return (
+    <>
+      {/* Hidden YouTube player iframe */}
+      <iframe
+        ref={iframeRef}
+        src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?enablejsapi=1&loop=1&playlist=${YOUTUBE_VIDEO_ID}&rel=0&modestbranding=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`}
+        style={{
+          position: 'fixed',
+          width: '1px',
+          height: '1px',
+          opacity: 0,
+          pointerEvents: 'none',
+          top: '-100px',
+          left: '-100px',
+        }}
+        allow="autoplay; encrypted-media"
+        title="Nhạc Tết - Vạn Sự Như Ý"
+      />
+
+      {/* Music toggle button */}
+      <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
+        {/* Tooltip */}
+        <AnimatePresence>
+          {showTooltip && (
+            <motion.div
+              initial={{ opacity: 0, x: 10, scale: 0.9 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: 10, scale: 0.9 }}
+              className="bg-tet-red/90 backdrop-blur-sm text-white text-xs py-1.5 px-3 rounded-full shadow-lg whitespace-nowrap"
+            >
+              🎵 Bật nhạc Tết nào!
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Button */}
+        <motion.button
+          onClick={toggleMusic}
+          disabled={!isReady}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className={`music-player-btn ${isPlaying ? 'is-playing' : ''}`}
+          aria-label={isPlaying ? 'Tắt nhạc' : 'Bật nhạc'}
+          title={isPlaying ? 'Tắt nhạc - Vạn Sự Như Ý' : 'Bật nhạc Tết - Vạn Sự Như Ý (Trúc Nhân)'}
+        >
+          <span className={isPlaying ? 'spin-note' : ''}>
+            {isPlaying ? '🎵' : '🎶'}
+          </span>
+        </motion.button>
+
+        {/* Playing indicator dots */}
+        {isPlaying && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex gap-0.5 items-end h-4"
+          >
+            {[0, 1, 2].map((i) => (
+              <motion.div
+                key={i}
+                className="w-0.5 bg-tet-gold rounded-full"
+                animate={{
+                  height: ['4px', '16px', '4px'],
+                }}
+                transition={{
+                  duration: 0.6,
+                  repeat: Infinity,
+                  delay: i * 0.15,
+                  ease: 'easeInOut',
+                }}
+              />
+            ))}
+          </motion.div>
+        )}
+      </div>
+    </>
+  );
+}

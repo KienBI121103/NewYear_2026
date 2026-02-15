@@ -1,0 +1,521 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Ma+Shan+Zheng&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --tet-red: #D32F2F;
+  --tet-red-dark: #B71C1C;
+  --tet-gold: #FFD700;
+  --tet-green: #2E7D32;
+  --tet-cream: #FFF8E1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+  background: linear-gradient(180deg, #B71C1C 0%, #D32F2F 30%, #C62828 60%, #B71C1C 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: #FFF8E1;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #B71C1C;
+}
+::-webkit-scrollbar-thumb {
+  background: #FFD700;
+  border-radius: 3px;
+}
+
+/* ===== BACKGROUND PATTERNS ===== */
+
+/* Tet pattern with 壽 / Thọ watermark */
+.bg-tet-pattern {
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 50% 80%, rgba(255, 215, 0, 0.03) 0%, transparent 50%);
+  position: relative;
+}
+
+.bg-tet-pattern::before {
+  content: '壽';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40vw;
+  font-family: 'Ma Shan Zheng', serif;
+  color: rgba(255, 215, 0, 0.025);
+  pointer-events: none;
+  z-index: 0;
+  line-height: 1;
+}
+
+/* Cloud pattern (vân mây) */
+.cloud-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100' fill='rgba(255,215,0,0.06)'%3E%3Cpath d='M30 80 Q50 40 80 60 Q100 30 130 55 Q150 35 170 60 Q190 50 190 80 Z'/%3E%3C/svg%3E");
+  background-size: 300px 150px;
+  background-repeat: repeat-x;
+}
+
+/* ===== GLASSMORPHISM CARDS ===== */
+
+.glass-card {
+  background: rgba(255, 248, 225, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 215, 0, 0.15);
+}
+
+.glass-card-gold {
+  background: rgba(255, 215, 0, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+}
+
+/* ===== FORTUNE CARD (Thẻ quẻ) ===== */
+
+.fortune-card {
+  background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 30%, #FFF8E1 60%, #FFE082 100%);
+  border: 4px solid transparent;
+  border-image: linear-gradient(135deg, #D4A017, #FFD700, #B8860B, #FFD700, #D4A017) 1;
+  box-shadow:
+    0 0 30px rgba(255, 215, 0, 0.35),
+    0 0 60px rgba(255, 215, 0, 0.15),
+    inset 0 0 30px rgba(255, 215, 0, 0.1);
+  position: relative;
+}
+
+/* Inner ornate border */
+.fortune-card::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 2px solid rgba(212, 160, 23, 0.35);
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+/* Dragon-phoenix corner ornaments */
+.fortune-card::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath d='M5 5 C15 5 20 10 25 20 C20 15 10 12 5 15 Z' fill='%23D4A017' opacity='0.4'/%3E%3Cpath d='M8 8 C14 10 18 16 20 22 C16 18 10 14 8 12 Z' fill='%23FFD700' opacity='0.3'/%3E%3C/svg%3E") top left no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath d='M55 5 C45 5 40 10 35 20 C40 15 50 12 55 15 Z' fill='%23D4A017' opacity='0.4'/%3E%3Cpath d='M52 8 C46 10 42 16 40 22 C44 18 50 14 52 12 Z' fill='%23FFD700' opacity='0.3'/%3E%3C/svg%3E") top right no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath d='M5 55 C15 55 20 50 25 40 C20 45 10 48 5 45 Z' fill='%23D4A017' opacity='0.4'/%3E%3Cpath d='M8 52 C14 50 18 44 20 38 C16 42 10 46 8 48 Z' fill='%23FFD700' opacity='0.3'/%3E%3C/svg%3E") bottom left no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath d='M55 55 C45 55 40 50 35 40 C40 45 50 48 55 45 Z' fill='%23D4A017' opacity='0.4'/%3E%3Cpath d='M52 52 C46 50 42 44 40 38 C44 42 50 46 52 48 Z' fill='%23FFD700' opacity='0.3'/%3E%3C/svg%3E") bottom right no-repeat;
+  background-size: 50px 50px;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Dragon-phoenix border frame for result card */
+.dragon-phoenix-frame {
+  position: relative;
+}
+
+.dragon-phoenix-frame::before {
+  content: '龍';
+  position: absolute;
+  top: -18px;
+  left: -12px;
+  font-family: 'Ma Shan Zheng', serif;
+  font-size: 2.5rem;
+  color: rgba(212, 160, 23, 0.25);
+  transform: rotate(-15deg);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.dragon-phoenix-frame::after {
+  content: '鳳';
+  position: absolute;
+  bottom: -18px;
+  right: -12px;
+  font-family: 'Ma Shan Zheng', serif;
+  font-size: 2.5rem;
+  color: rgba(212, 160, 23, 0.25);
+  transform: rotate(15deg);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* ===== CALLIGRAPHY TEXT ===== */
+
+.text-calligraphy {
+  font-family: 'Ma Shan Zheng', 'Playfair Display', serif;
+  letter-spacing: 0.05em;
+}
+
+.text-calligraphy-poem {
+  font-family: 'Playfair Display', 'Ma Shan Zheng', serif;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  line-height: 2;
+}
+
+/* ===== GRADIENT TEXT ===== */
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA000 50%, #FFD700 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-red {
+  background: linear-gradient(135deg, #FF6B6B 0%, #D32F2F 50%, #B71C1C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== BUTTON STYLES ===== */
+
+.btn-tet {
+  background: linear-gradient(135deg, #D32F2F 0%, #B71C1C 100%);
+  color: #FFD700;
+  font-weight: 700;
+  border-radius: 9999px;
+  padding: 14px 40px;
+  font-size: 1.1rem;
+  border: 2px solid #FFD700;
+  box-shadow:
+    0 4px 15px rgba(255, 215, 0, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-tet::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 215, 0, 0.25) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.btn-tet:hover::before {
+  transform: translateX(100%);
+}
+
+.btn-tet:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #E53935 0%, #C62828 100%);
+  box-shadow:
+    0 6px 25px rgba(255, 215, 0, 0.45),
+    0 4px 8px rgba(0, 0, 0, 0.15),
+    0 0 20px rgba(211, 47, 47, 0.3);
+}
+
+.btn-tet:active {
+  transform: translateY(0);
+}
+
+/* Gold variant button */
+.btn-tet-gold {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA000 100%);
+  color: #B71C1C;
+  font-weight: 700;
+  border-radius: 9999px;
+  padding: 14px 40px;
+  font-size: 1.1rem;
+  border: 2px solid rgba(183, 28, 28, 0.3);
+  box-shadow:
+    0 4px 15px rgba(255, 215, 0, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-tet-gold:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 25px rgba(255, 215, 0, 0.5),
+    0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== TOPIC CARD ===== */
+
+.topic-card {
+  background: rgba(255, 248, 225, 0.06);
+  border: 2px solid rgba(255, 215, 0, 0.15);
+  border-radius: 16px;
+  padding: 20px 16px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.topic-card:hover {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.4);
+  transform: translateY(-4px);
+}
+
+.topic-card.active {
+  background: rgba(255, 215, 0, 0.15);
+  border-color: #FFD700;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2), 0 0 40px rgba(255, 215, 0, 0.1);
+}
+
+/* ===== INPUT STYLES ===== */
+
+.input-tet {
+  background: rgba(255, 248, 225, 0.1);
+  border: 2px solid rgba(255, 215, 0, 0.2);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: #FFF8E1;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.input-tet::placeholder {
+  color: rgba(255, 248, 225, 0.4);
+}
+
+.input-tet:focus {
+  outline: none;
+  border-color: #FFD700;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.15);
+  background: rgba(255, 248, 225, 0.15);
+}
+
+/* ===== BAMBOO TUBE ===== */
+
+.bamboo-tube {
+  background: linear-gradient(180deg, #8D6E63 0%, #6D4C41 30%, #5D4037 60%, #4E342E 100%);
+  border-radius: 12px 12px 8px 8px;
+  box-shadow:
+    inset -4px 0 8px rgba(0, 0, 0, 0.3),
+    inset 4px 0 8px rgba(141, 110, 99, 0.3),
+    0 8px 32px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.bamboo-tube::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  width: 30%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  border-radius: inherit;
+}
+
+/* Fortune stick */
+.fortune-stick {
+  background: linear-gradient(180deg, #FFECB3 0%, #FFD54F 50%, #FFB300 100%);
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== PETAL & PARTICLES ===== */
+
+.petal {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0.8;
+}
+
+.firework-particle {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 50;
+}
+
+/* ===== SHINE EFFECT ===== */
+
+.shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-effect::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 40%,
+    rgba(255, 215, 0, 0.15) 50%,
+    transparent 60%
+  );
+  animation: shineMove 3s ease-in-out infinite;
+}
+
+@keyframes shineMove {
+  0% { transform: translateX(-100%) translateY(-100%); }
+  100% { transform: translateX(100%) translateY(100%); }
+}
+
+/* ===== MUSIC PLAYER ===== */
+
+.music-player-btn {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  z-index: 50;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px solid rgba(255, 215, 0, 0.4);
+  background: rgba(183, 28, 28, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.music-player-btn:hover {
+  transform: scale(1.1);
+  border-color: #FFD700;
+  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+}
+
+@keyframes spinNote {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spin-note {
+  animation: spinNote 3s linear infinite;
+}
+
+/* ===== DECORATIVE BORDERS ===== */
+
+.border-ornament {
+  border-image: repeating-linear-gradient(
+    90deg,
+    #FFD700 0px,
+    #FFD700 8px,
+    transparent 8px,
+    transparent 16px
+  ) 4;
+}
+
+/* ===== ANIMATIONS ===== */
+
+/* Loading dots */
+.loading-dots span {
+  animation: loadingDot 1.4s infinite both;
+}
+.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes loadingDot {
+  0%, 80%, 100% { opacity: 0; transform: scale(0.6); }
+  40% { opacity: 1; transform: scale(1); }
+}
+
+/* Firecracker burst animation */
+@keyframes firecrackerBurst {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.5); }
+  100% { opacity: 0; transform: scale(2); }
+}
+
+.firecracker-burst {
+  animation: firecrackerBurst 0.6s ease-out forwards;
+}
+
+/* Banh chung bounce */
+@keyframes banhChungBounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-8px) rotate(-3deg); }
+  75% { transform: translateY(-4px) rotate(3deg); }
+}
+
+.banh-chung-bounce {
+  animation: banhChungBounce 4s ease-in-out infinite;
+}
+
+/* Hoa mai sway */
+@keyframes hoaMaiSway {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+.hoa-mai-sway {
+  animation: hoaMaiSway 3s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+/* Pulse glow for cards */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.4), 0 0 60px rgba(255, 215, 0, 0.1); }
+}
+
+.pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Dong Ho horse gallop */
+@keyframes horseGallop {
+  0%, 100% { transform: translateY(0) scaleX(1); }
+  25% { transform: translateY(-6px) scaleX(1.02); }
+  50% { transform: translateY(0) scaleX(0.98); }
+  75% { transform: translateY(-3px) scaleX(1.01); }
+}
+
+.horse-gallop {
+  animation: horseGallop 2s ease-in-out infinite;
+}
+
+/* ===== SAFE AREA ===== */
+
+@supports (padding: env(safe-area-inset-bottom)) {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Selection style */
+::selection {
+  background: rgba(255, 215, 0, 0.3);
+  color: #FFF8E1;
+}
