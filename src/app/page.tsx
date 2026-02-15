@@ -15,6 +15,10 @@ const BackgroundEffects = dynamic(() => import('@/components/BackgroundEffects')
 const MusicPlayer = dynamic(() => import('@/components/MusicPlayer'), {
   ssr: false,
 });
+const ClickFireworks = dynamic(
+  () => import('@/components/BackgroundEffects').then(mod => ({ default: mod.ClickFireworks })),
+  { ssr: false }
+);
 
 type Screen = 'landing' | 'shaking' | 'loading' | 'result';
 
@@ -116,54 +120,56 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main className="relative min-h-screen overflow-hidden">
-      {/* Background Effects */}
-      <BackgroundEffects />
+    <ClickFireworks>
+      <main className="relative min-h-screen overflow-hidden">
+        {/* Background Effects */}
+        <BackgroundEffects />
 
-      {/* Music Player */}
-      <MusicPlayer />
+        {/* Music Player */}
+        <MusicPlayer />
 
-      {/* Screen Router */}
-      <AnimatePresence mode="wait">
-        {screen === 'landing' && (
-          <LandingScreen key="landing" onSubmit={handleSubmit} />
-        )}
+        {/* Screen Router */}
+        <AnimatePresence mode="wait">
+          {screen === 'landing' && (
+            <LandingScreen key="landing" onSubmit={handleSubmit} />
+          )}
 
-        {screen === 'shaking' && formData && (
-          <ShakingScreen
-            key="shaking"
-            onComplete={handleShakingComplete}
-            userName={formData.name}
-          />
-        )}
+          {screen === 'shaking' && formData && (
+            <ShakingScreen
+              key="shaking"
+              onComplete={handleShakingComplete}
+              userName={formData.name}
+            />
+          )}
 
-        {screen === 'loading' && (
-          <div key="loading" className="min-h-screen flex flex-col items-center justify-center relative z-10">
-            <div className="text-center">
-              <div className="text-6xl mb-4 animate-bounce-slow">🐴</div>
-              <p className="text-tet-gold text-lg font-medium mb-2">
-                Đang mở quẻ...
-              </p>
-              <div className="loading-dots text-tet-gold/60 text-2xl">
-                <span>●</span>
-                <span>●</span>
-                <span>●</span>
+          {screen === 'loading' && (
+            <div key="loading" className="min-h-screen flex flex-col items-center justify-center relative z-10">
+              <div className="text-center">
+                <div className="text-6xl mb-4 animate-bounce-slow">🐴</div>
+                <p className="text-tet-gold text-lg font-medium mb-2">
+                  Đang mở quẻ...
+                </p>
+                <div className="loading-dots text-tet-gold/60 text-2xl">
+                  <span>●</span>
+                  <span>●</span>
+                  <span>●</span>
+                </div>
+                <p className="text-tet-cream/40 text-xs mt-4">
+                  Đang viết lời chúc riêng cho bạn ✨
+                </p>
               </div>
-              <p className="text-tet-cream/40 text-xs mt-4">
-                AI đang viết lời chúc riêng cho bạn ✨
-              </p>
             </div>
-          </div>
-        )}
+          )}
 
-        {screen === 'result' && result && (
-          <ResultScreen
-            key="result"
-            result={result}
-            onReset={handleReset}
-          />
-        )}
-      </AnimatePresence>
-    </main>
+          {screen === 'result' && result && (
+            <ResultScreen
+              key="result"
+              result={result}
+              onReset={handleReset}
+            />
+          )}
+        </AnimatePresence>
+      </main>
+    </ClickFireworks>
   );
 }

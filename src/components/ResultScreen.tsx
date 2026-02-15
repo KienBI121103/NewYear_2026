@@ -319,7 +319,7 @@ export default function ResultScreen({ result, onReset }: ResultScreenProps) {
         transition={{ delay: 2 }}
         className="text-[10px] text-tet-cream/30 mt-8 text-center"
       >
-        🧧 Chúc {result.name} năm Bính Ngọ 2026 An Khang Thịnh Vượng! 🧧
+        🧧 Chúc {result.name} năm Bính Ngọ 2026 Mã Đáo Thành Công! 🧧
       </motion.p>
     </motion.div>
   );
