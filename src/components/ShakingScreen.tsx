@@ -4,12 +4,15 @@ import { useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 
+import type { SoundType } from '@/hooks/useSoundSystem';
+
 interface ShakingScreenProps {
   onComplete: () => void;
   userName: string;
+  onPlaySound?: (sound: SoundType) => void;
 }
 
-export default function ShakingScreen({ onComplete, userName }: ShakingScreenProps) {
+export default function ShakingScreen({ onComplete, userName, onPlaySound }: ShakingScreenProps) {
   const [phase, setPhase] = useState<'intro' | 'shaking' | 'stick-out' | 'reveal'>('intro');
   const [shakeCount, setShakeCount] = useState(0);
   const [isUserShaking, setIsUserShaking] = useState(false);
@@ -66,22 +69,24 @@ export default function ShakingScreen({ onComplete, userName }: ShakingScreenPro
     timers.push(setTimeout(() => {
       setPhase('reveal');
       fireConfetti();
+      onPlaySound?.('firecracker');
     }, 7500));
     timers.push(setTimeout(() => {
       onComplete();
     }, 9000));
 
     return () => timers.forEach(clearTimeout);
-  }, [onComplete, fireConfetti]);
+  }, [onComplete, fireConfetti, onPlaySound]);
 
   // Shake interaction
   const handleShake = useCallback(() => {
     if (phase === 'shaking') {
       setIsUserShaking(true);
       setShakeCount(prev => prev + 1);
+      onPlaySound?.('bambooClack');
       setTimeout(() => setIsUserShaking(false), 200);
     }
-  }, [phase]);
+  }, [phase, onPlaySound]);
 
   // Device motion for mobile shake detection
   useEffect(() => {
@@ -313,9 +318,9 @@ export default function ShakingScreen({ onComplete, userName }: ShakingScreenPro
           <div className="absolute top-[120px] left-0 w-full h-[2px] bg-amber-900/40" />
           <div className="absolute top-[160px] left-0 w-full h-[2px] bg-amber-900/40" />
 
-          {/* Chinese character decoration */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-amber-300/30 text-4xl font-serif select-none">
-            籤
+          {/* Vietnamese text decoration */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-amber-300/30 text-xl select-none" style={{ fontFamily: 'Pattaya, serif' }}>
+            Quẻ
           </div>
 
           {/* Tube bottom */}

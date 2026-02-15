@@ -106,7 +106,7 @@ function Firework({ x, y, color, delay: d }: { x: number; y: number; color: stri
   );
 }
 
-// Enhanced ornate cloud decorations with Phúc/Lộc watermarks
+// Enhanced ornate cloud decorations (NO Chinese characters)
 function CloudDecoration() {
   return (
     <>
@@ -118,7 +118,7 @@ function CloudDecoration() {
         <svg width="360" height="180" viewBox="0 0 360 180" fill="#FFD700">
           <path d="M30 145 Q55 55 115 92 Q150 30 210 68 Q250 15 300 50 Q340 38 330 130 Q310 165 30 155 Z" />
           <path d="M60 130 Q75 80 110 100 Q130 65 165 82 Q190 50 220 70 Q235 58 225 120 Q215 140 60 135 Z" fill="#FFE082" opacity="0.3" />
-          <text x="170" y="115" textAnchor="middle" fontSize="55" fontFamily="Ma Shan Zheng, serif" fill="#FFD700" opacity="0.4">福</text>
+          <path d="M155 95 Q165 80 180 90 Q190 75 200 88 Q185 100 170 95 Z" fill="#FFE082" opacity="0.25" />
         </svg>
       </motion.div>
 
@@ -129,7 +129,7 @@ function CloudDecoration() {
       >
         <svg width="300" height="150" viewBox="0 0 300 150" fill="#FFD700">
           <path d="M25 120 Q50 42 100 75 Q130 20 180 52 Q215 12 255 45 Q285 35 270 108 Q255 135 25 128 Z" />
-          <text x="150" y="95" textAnchor="middle" fontSize="45" fontFamily="Ma Shan Zheng, serif" fill="#FFD700" opacity="0.35">祿</text>
+          <path d="M120 75 Q135 60 150 72 Q160 58 175 68" stroke="#FFE082" strokeWidth="2" fill="none" opacity="0.3" />
         </svg>
       </motion.div>
 
@@ -168,10 +168,11 @@ function CloudDecoration() {
   );
 }
 
-// Câu đối calligraphy couplets
+// Vietnamese Calligraphy Couplets (Pattaya font, NO Chinese characters)
 function CalligraphyCouplets() {
   return (
     <>
+      {/* Left: Mã Đáo Thành Công */}
       <motion.div
         className="cau-doi cau-doi-left cau-doi-sway hidden md:block"
         initial={{ y: -100, opacity: 0 }}
@@ -179,16 +180,14 @@ function CalligraphyCouplets() {
         transition={{ duration: 1.2, delay: 0.5, ease: 'easeOut' }}
       >
         <div className="cau-doi-inner">
-          <span>馬</span>
-          <span>到</span>
-          <span>成</span>
-          <span>功</span>
-        </div>
-        <div className="text-center mt-1">
-          <span className="text-[8px] text-tet-gold/40 font-medium">Mã Đáo Thành Công</span>
+          <span>Mã</span>
+          <span>Đáo</span>
+          <span>Thành</span>
+          <span>Công</span>
         </div>
       </motion.div>
 
+      {/* Right: Vạn Sự Như Ý */}
       <motion.div
         className="cau-doi cau-doi-right cau-doi-sway hidden md:block"
         initial={{ y: -100, opacity: 0 }}
@@ -197,14 +196,122 @@ function CalligraphyCouplets() {
         style={{ animationDelay: '1s' }}
       >
         <div className="cau-doi-inner">
-          <span>萬</span>
-          <span>事</span>
-          <span>如</span>
-          <span>意</span>
+          <span>Vạn</span>
+          <span>Sự</span>
+          <span>Như</span>
+          <span>Ý</span>
         </div>
-        <div className="text-center mt-1">
-          <span className="text-[8px] text-tet-gold/40 font-medium">Vạn Sự Như Ý</span>
-        </div>
+      </motion.div>
+    </>
+  );
+}
+
+// Cây Nêu (Traditional Tết Pole)
+function CayNeu() {
+  return (
+    <motion.div
+      className="fixed bottom-0 right-[12%] opacity-30 pointer-events-none hidden lg:block cay-neu-sway"
+      initial={{ y: 60, opacity: 0 }}
+      animate={{ y: 0, opacity: 0.3 }}
+      transition={{ duration: 1.5, delay: 1 }}
+    >
+      <svg width="80" height="320" viewBox="0 0 80 320" fill="none">
+        {/* Main bamboo pole */}
+        <rect x="35" y="40" width="10" height="280" rx="5" fill="url(#bambooGrad)" />
+        {/* Bamboo nodes */}
+        <rect x="33" y="100" width="14" height="4" rx="2" fill="#5D4037" opacity="0.6" />
+        <rect x="33" y="160" width="14" height="4" rx="2" fill="#5D4037" opacity="0.6" />
+        <rect x="33" y="220" width="14" height="4" rx="2" fill="#5D4037" opacity="0.6" />
+        {/* Red flag at top */}
+        <g className="bag-sway">
+          <path d="M40 40 L20 10 Q40 -5 60 10 Z" fill="#D32F2F" stroke="#FFD700" strokeWidth="1" />
+          <circle cx="40" cy="12" r="5" fill="#FFD700" opacity="0.7" />
+        </g>
+        {/* Hanging carp shape */}
+        <g transform="translate(50, 60)">
+          <ellipse cx="8" cy="6" rx="8" ry="6" fill="#FFD700" opacity="0.5" />
+          <path d="M16 6 L24 0 L24 12 Z" fill="#FFD700" opacity="0.4" />
+          <circle cx="5" cy="5" r="1" fill="#5C0000" opacity="0.5" />
+        </g>
+        {/* Red ribbon strips */}
+        <path d="M38 50 Q25 70 30 90" stroke="#D32F2F" strokeWidth="2" fill="none" opacity="0.5" />
+        <path d="M42 50 Q55 65 52 85" stroke="#D32F2F" strokeWidth="2" fill="none" opacity="0.5" />
+        {/* Gold coins */}
+        <circle cx="28" cy="92" r="5" fill="#FFD700" opacity="0.4" stroke="#B8860B" strokeWidth="0.5" />
+        <circle cx="54" cy="87" r="4" fill="#FFD700" opacity="0.35" stroke="#B8860B" strokeWidth="0.5" />
+        {/* Ground base */}
+        <ellipse cx="40" cy="318" rx="20" ry="4" fill="#5D4037" opacity="0.4" />
+        <defs>
+          <linearGradient id="bambooGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#6D4C41" />
+            <stop offset="30%" stopColor="#8D6E63" />
+            <stop offset="70%" stopColor="#6D4C41" />
+            <stop offset="100%" stopColor="#5D4037" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </motion.div>
+  );
+}
+
+// Gold coins floating decoration
+function GoldCoins() {
+  const coins = useMemo(() => [
+    { left: '5%', top: '55%', size: 20, delay: 0, duration: 4 },
+    { left: '92%', top: '40%', size: 16, delay: 1, duration: 5 },
+    { left: '88%', top: '75%', size: 14, delay: 2, duration: 3.5 },
+    { left: '8%', top: '80%', size: 18, delay: 0.5, duration: 4.5 },
+    { left: '50%', top: '90%', size: 12, delay: 1.5, duration: 3.8 },
+  ], []);
+
+  return (
+    <>
+      {coins.map((coin, i) => (
+        <motion.div
+          key={`coin-${i}`}
+          className="fixed pointer-events-none gold-coin z-[2]"
+          style={{ left: coin.left, top: coin.top }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.25 }}
+          transition={{ delay: coin.delay + 1 }}
+        >
+          <svg width={coin.size} height={coin.size} viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="11" fill="#FFD700" stroke="#B8860B" strokeWidth="1.5" />
+            <circle cx="12" cy="12" r="7" fill="none" stroke="#B8860B" strokeWidth="0.8" opacity="0.5" />
+            <rect x="10" y="10" width="4" height="4" rx="1" fill="#B8860B" opacity="0.4" />
+          </svg>
+        </motion.div>
+      ))}
+    </>
+  );
+}
+
+// Red silk ribbons
+function RedSilkRibbons() {
+  return (
+    <>
+      <motion.div
+        className="fixed top-[15%] -left-2 opacity-20 pointer-events-none hidden md:block ribbon-float"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.2 }}
+        transition={{ delay: 1.5 }}
+      >
+        <svg width="40" height="160" viewBox="0 0 40 160">
+          <path d="M20 0 Q25 30 18 60 Q12 90 22 120 Q30 140 15 160" stroke="#D32F2F" strokeWidth="6" fill="none" opacity="0.6" />
+          <path d="M20 0 Q25 30 18 60 Q12 90 22 120 Q30 140 15 160" stroke="#FF6B6B" strokeWidth="3" fill="none" opacity="0.3" />
+        </svg>
+      </motion.div>
+      <motion.div
+        className="fixed top-[20%] -right-2 opacity-20 pointer-events-none hidden md:block"
+        style={{ animation: 'ribbonFloat 4.5s ease-in-out infinite', animationDelay: '1s' }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.2 }}
+        transition={{ delay: 2 }}
+      >
+        <svg width="40" height="140" viewBox="0 0 40 140" style={{ transform: 'scaleX(-1)' }}>
+          <path d="M20 0 Q28 25 15 55 Q8 80 25 110 Q32 125 18 140" stroke="#D32F2F" strokeWidth="5" fill="none" opacity="0.6" />
+          <path d="M20 0 Q28 25 15 55 Q8 80 25 110 Q32 125 18 140" stroke="#FF6B6B" strokeWidth="2.5" fill="none" opacity="0.3" />
+        </svg>
       </motion.div>
     </>
   );
@@ -348,45 +455,34 @@ function CornerDecorations() {
   );
 }
 
-// Click-anywhere firework handler with sound
+// Wind chime sound synthesis (replaces old "dump dump")
+function playWindChime(audioCtx: AudioContext) {
+  const now = audioCtx.currentTime;
+  const frequencies = [2093, 2637, 3136, 2349]; // C7, E7, G7, D7
+  frequencies.forEach((freq, i) => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq, now + i * 0.06);
+    gain.gain.setValueAtTime(0.04, now + i * 0.06);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.06 + 0.8);
+    osc.start(now + i * 0.06);
+    osc.stop(now + i * 0.06 + 0.8);
+  });
+}
+
+// Click-anywhere firework handler with wind chime sound
 function ClickFireworks({ children }: { children: React.ReactNode }) {
   const [clicks, setClicks] = useState<{ id: number; x: number; y: number }[]>([]);
   const audioContextRef = useState<AudioContext | null>(null);
 
-  const playFireworkSound = useCallback(() => {
+  const playClickSound = useCallback(() => {
     try {
       const ctx = audioContextRef[0] || new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
       if (!audioContextRef[0]) audioContextRef[0] = ctx;
-
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      const now = ctx.currentTime;
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(200, now);
-      osc.frequency.exponentialRampToValueAtTime(50, now + 0.15);
-      gain.gain.setValueAtTime(0.08, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
-      osc.start(now);
-      osc.stop(now + 0.2);
-
-      setTimeout(() => {
-        const bufferSize = 2048;
-        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-        const data = buffer.getChannelData(0);
-        for (let i = 0; i < bufferSize; i++) {
-          data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / bufferSize, 3);
-        }
-        const noise = ctx.createBufferSource();
-        noise.buffer = buffer;
-        const g2 = ctx.createGain();
-        g2.gain.setValueAtTime(0.04, ctx.currentTime);
-        g2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
-        noise.connect(g2);
-        g2.connect(ctx.destination);
-        noise.start();
-      }, 100);
+      playWindChime(ctx);
     } catch {
       // Audio not supported
     }
@@ -397,7 +493,7 @@ function ClickFireworks({ children }: { children: React.ReactNode }) {
     const x = e.clientX;
     const y = e.clientY;
     setClicks(prev => [...prev, { id, x, y }]);
-    playFireworkSound();
+    playClickSound();
 
     const xNorm = x / window.innerWidth;
     const yNorm = y / window.innerHeight;
@@ -413,7 +509,7 @@ function ClickFireworks({ children }: { children: React.ReactNode }) {
     });
 
     setTimeout(() => setClicks(prev => prev.filter(c => c.id !== id)), 1200);
-  }, [playFireworkSound]);
+  }, [playClickSound]);
 
   return (
     <div onClick={handleClick} className="contents">
@@ -486,6 +582,9 @@ export default function BackgroundEffects() {
       <Lanterns />
       <Firecrackers />
       <CornerDecorations />
+      <CayNeu />
+      <GoldCoins />
+      <RedSilkRibbons />
       {petals.map((p) => <Petal key={p.id} {...p} />)}
       <AnimatePresence>
         {showFireworks && fireworks.map((fw, i) => <Firework key={i} {...fw} />)}

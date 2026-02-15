@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { TOPICS } from '@/data/zodiac';
 import ChibiHorseMascot from './ChibiHorseMascot';
+import HorseShadowBanner from './HorseShadowBanner';
 
 interface LandingScreenProps {
   onSubmit: (data: { name: string; birthYear: number; topic: string }) => void;
@@ -141,6 +142,9 @@ export default function LandingScreen({ onSubmit }: LandingScreenProps) {
           </p>
           <div className="w-16 h-px bg-gradient-to-l from-transparent to-tet-gold/50" />
         </div>
+
+        {/* Horse Shadow Banner */}
+        <HorseShadowBanner />
       </motion.div>
 
       {/* Form Card */}
@@ -210,8 +214,8 @@ export default function LandingScreen({ onSubmit }: LandingScreenProps) {
               >
                 {/* SVG illustration */}
                 {TopicIllustrations[t.id] || <span className="text-3xl block mb-2">{t.icon}</span>}
-                <span className="text-sm font-semibold text-tet-cream block">{t.label}</span>
-                <span className="text-[10px] text-tet-cream/50 block mt-1">{t.description}</span>
+                <span className="text-sm font-semibold topic-label block">{t.label}</span>
+                <span className="text-[10px] topic-desc block mt-1">{t.description}</span>
               </motion.button>
             ))}
           </div>

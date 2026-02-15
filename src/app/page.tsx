@@ -7,6 +7,7 @@ import LandingScreen from '@/components/LandingScreen';
 import ShakingScreen from '@/components/ShakingScreen';
 import ResultScreen from '@/components/ResultScreen';
 import { generateFortune } from '@/lib/generateFortune';
+import { useSoundSystem } from '@/hooks/useSoundSystem';
 
 // Dynamic import for heavy components (better performance)
 const BackgroundEffects = dynamic(() => import('@/components/BackgroundEffects'), {
@@ -58,12 +59,14 @@ export default function HomePage() {
   const [formData, setFormData] = useState<FormData | null>(null);
   const [result, setResult] = useState<FortuneResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { play: playSound } = useSoundSystem();
 
   // Handle form submission - generate fortune client-side
   const handleSubmit = useCallback(async (data: FormData) => {
     setFormData(data);
     setScreen('shaking');
     setError(null);
+    playSound('woodenFish'); // Play wooden fish tap on submit
 
     try {
       // Generate fortune client-side (works on static hosting like GitHub Pages)
@@ -75,7 +78,7 @@ export default function HomePage() {
       console.error('Fortune generation error:', err);
       setError('Không thể lấy quẻ, vui lòng thử lại!');
     }
-  }, []);
+  }, [playSound]);
 
   // Handle shaking animation complete
   const handleShakingComplete = useCallback(() => {
@@ -84,6 +87,7 @@ export default function HomePage() {
       alert(error);
     } else if (result) {
       setScreen('result');
+      playSound('firecracker'); // Play firecracker on result reveal
     } else {
       // API still loading, show loading state briefly then result
       setScreen('loading');
@@ -109,7 +113,7 @@ export default function HomePage() {
         });
       }, 15000);
     }
-  }, [error, result]);
+  }, [error, result, playSound]);
 
   // Handle reset
   const handleReset = useCallback(() => {
@@ -139,6 +143,7 @@ export default function HomePage() {
               key="shaking"
               onComplete={handleShakingComplete}
               userName={formData.name}
+              onPlaySound={playSound}
             />
           )}
 
