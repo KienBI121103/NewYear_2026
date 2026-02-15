@@ -455,22 +455,21 @@ function CornerDecorations() {
   );
 }
 
-// Wind chime sound synthesis (replaces old "dump dump")
-function playWindChime(audioCtx: AudioContext) {
+// Drum tap sound (trống hội) for click feedback
+function playDrumTap(audioCtx: AudioContext) {
   const now = audioCtx.currentTime;
-  const frequencies = [2093, 2637, 3136, 2349]; // C7, E7, G7, D7
-  frequencies.forEach((freq, i) => {
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(freq, now + i * 0.06);
-    gain.gain.setValueAtTime(0.04, now + i * 0.06);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.06 + 0.8);
-    osc.start(now + i * 0.06);
-    osc.stop(now + i * 0.06 + 0.8);
-  });
+  // Low drum hit
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(150, now);
+  osc.frequency.exponentialRampToValueAtTime(60, now + 0.15);
+  gain.gain.setValueAtTime(0.1, now);
+  gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+  osc.start(now);
+  osc.stop(now + 0.2);
 }
 
 // Click-anywhere firework handler with wind chime sound
@@ -482,7 +481,7 @@ function ClickFireworks({ children }: { children: React.ReactNode }) {
     try {
       const ctx = audioContextRef[0] || new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
       if (!audioContextRef[0]) audioContextRef[0] = ctx;
-      playWindChime(ctx);
+      playDrumTap(ctx);
     } catch {
       // Audio not supported
     }
@@ -589,7 +588,7 @@ export default function BackgroundEffects() {
       <AnimatePresence>
         {showFireworks && fireworks.map((fw, i) => <Firework key={i} {...fw} />)}
       </AnimatePresence>
-      <div className="fixed inset-0" style={{ background: 'radial-gradient(ellipse at center, transparent 50%, rgba(92, 0, 0, 0.35) 100%)' }} />
+      <div className="fixed inset-0" style={{ background: 'radial-gradient(ellipse at center, transparent 50%, rgba(42, 14, 4, 0.4) 100%)' }} />
       <div className="fixed bottom-0 left-0 right-0 h-16 wave-pattern opacity-80 pointer-events-none" />
     </div>
   );

@@ -3,113 +3,154 @@
 import { motion } from 'framer-motion';
 
 /**
- * Horse Shadow Banner - A small running horse with a majestic Xích Thố war horse shadow.
- * The shadow appears larger and more heroic than the actual horse,
- * symbolizing potential and hidden greatness.
+ * Horse Shadow Banner - "Tiểu Dã & Xích Thố" concept.
+ * A small determined horse (Tiểu Dã) running with effort,
+ * whose shadow is the mighty Xích Thố war horse.
+ * Symbolizes hidden potential and extraordinary effort.
  */
 export default function HorseShadowBanner() {
   return (
     <motion.div
-      className="relative w-full flex flex-col items-center justify-center py-3"
+      className="relative w-full flex flex-col items-center justify-center py-4 overflow-hidden"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 0.3 }}
     >
-      {/* Small running horse */}
+      {/* Dust particles behind the running horse */}
+      {[...Array(6)].map((_, i) => (
+        <motion.div
+          key={`dust-${i}`}
+          className="absolute rounded-full"
+          style={{
+            width: 3 + Math.random() * 4,
+            height: 3 + Math.random() * 4,
+            background: 'rgba(212, 160, 23, 0.3)',
+            bottom: `${32 + Math.random() * 10}%`,
+            left: `${35 + Math.random() * 30}%`,
+          }}
+          animate={{
+            x: [0, -30 - Math.random() * 40, -80],
+            opacity: [0, 0.6, 0],
+            scale: [0.5, 1.2, 0],
+          }}
+          transition={{
+            duration: 1.2 + Math.random() * 0.8,
+            repeat: Infinity,
+            delay: i * 0.3,
+            ease: 'easeOut',
+          }}
+        />
+      ))}
+
+      {/* Small running horse (Tiểu Dã) */}
       <motion.div
-        className="relative z-10 horse-bounce"
-        animate={{ x: [-8, 8, -8] }}
-        transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+        className="relative z-10"
+        animate={{ x: [-6, 6, -6] }}
+        transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
       >
-        <svg width="80" height="60" viewBox="0 0 100 75" fill="none">
-          {/* Body */}
-          <ellipse cx="50" cy="35" rx="22" ry="14" fill="#D4A017" />
+        <svg width="90" height="65" viewBox="0 0 110 80" fill="none">
+          {/* Body - warm golden color matching the illustration */}
+          <ellipse cx="55" cy="38" rx="24" ry="15" fill="#D4A017" />
+          <ellipse cx="55" cy="40" rx="18" ry="10" fill="#FFCC80" opacity="0.3" />
           {/* Neck */}
-          <path d="M68 30 Q72 18 66 8" stroke="#D4A017" strokeWidth="8" fill="none" strokeLinecap="round" />
+          <path d="M74 32 Q78 20 72 10" stroke="#D4A017" strokeWidth="8" fill="none" strokeLinecap="round" />
           {/* Head */}
-          <ellipse cx="64" cy="8" rx="8" ry="6" fill="#D4A017" />
+          <ellipse cx="70" cy="10" rx="9" ry="7" fill="#D4A017" />
+          <ellipse cx="72" cy="12" rx="5" ry="4" fill="#FFCC80" opacity="0.3" />
           {/* Ear */}
-          <path d="M60 2 L58 -4 L63 1" fill="#B8860B" />
+          <path d="M66 3 L64 -3 L69 2" fill="#B8860B" />
           {/* Eye */}
-          <circle cx="67" cy="6" r="1.5" fill="#3E0000" />
+          <circle cx="73" cy="8" r="2" fill="#3E0000" />
+          <circle cx="74" cy="7.5" r="0.8" fill="white" opacity="0.8" />
           {/* Mane (red - áo dài style) */}
-          <path d="M66 8 Q72 18 68 28 Q74 22 70 14" fill="#D32F2F" opacity="0.7" />
-          <path d="M64 6 Q68 12 66 20 Q70 15 67 10" fill="#C62828" opacity="0.5" />
+          <path d="M72 10 Q78 20 74 30 Q80 24 76 16" fill="#CC2222" opacity="0.7" />
+          <path d="M70 8 Q74 14 72 22 Q76 17 73 12" fill="#CC2222" opacity="0.5" />
+          {/* Saddle */}
+          <path d="M46 30 Q55 26 64 30 Q55 34 46 30" fill="#8B1A1A" opacity="0.6" />
+          <ellipse cx="55" cy="30" rx="6" ry="3" fill="#FFD700" opacity="0.3" />
           {/* Tail */}
-          <path d="M28 32 Q16 28 10 38 Q18 32 22 38" fill="#D32F2F" opacity="0.6" />
-          <path d="M28 35 Q14 34 8 42 Q16 36 24 40" fill="#C62828" opacity="0.4" />
+          <path d="M31 35 Q18 30 12 40 Q20 34 26 40" fill="#CC2222" opacity="0.6" />
+          <path d="M31 38 Q16 36 10 44 Q18 38 28 42" fill="#CC2222" opacity="0.4" />
           {/* Front legs (galloping) */}
           <motion.line
-            x1="60" y1="48" x2="68" y2="68"
+            x1="66" y1="52" x2="74" y2="72"
             stroke="#B8860B" strokeWidth="4" strokeLinecap="round"
-            animate={{ x2: [68, 72, 68], y2: [68, 66, 68] }}
-            transition={{ duration: 0.6, repeat: Infinity, ease: 'easeInOut' }}
+            animate={{ x2: [74, 78, 74], y2: [72, 70, 72] }}
+            transition={{ duration: 0.5, repeat: Infinity, ease: 'easeInOut' }}
           />
           <motion.line
-            x1="55" y1="48" x2="58" y2="68"
+            x1="60" y1="52" x2="63" y2="72"
             stroke="#B8860B" strokeWidth="4" strokeLinecap="round"
-            animate={{ x2: [58, 50, 58], y2: [68, 66, 68] }}
-            transition={{ duration: 0.6, repeat: Infinity, ease: 'easeInOut', delay: 0.15 }}
+            animate={{ x2: [63, 56, 63], y2: [72, 70, 72] }}
+            transition={{ duration: 0.5, repeat: Infinity, ease: 'easeInOut', delay: 0.12 }}
           />
           {/* Back legs (galloping) */}
           <motion.line
-            x1="40" y1="48" x2="35" y2="68"
+            x1="45" y1="52" x2="40" y2="72"
             stroke="#B8860B" strokeWidth="4" strokeLinecap="round"
-            animate={{ x2: [35, 30, 35], y2: [68, 66, 68] }}
-            transition={{ duration: 0.6, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
+            animate={{ x2: [40, 35, 40], y2: [72, 70, 72] }}
+            transition={{ duration: 0.5, repeat: Infinity, ease: 'easeInOut', delay: 0.25 }}
           />
           <motion.line
-            x1="35" y1="48" x2="28" y2="68"
+            x1="40" y1="52" x2="33" y2="72"
             stroke="#B8860B" strokeWidth="4" strokeLinecap="round"
-            animate={{ x2: [28, 34, 28], y2: [68, 66, 68] }}
-            transition={{ duration: 0.6, repeat: Infinity, ease: 'easeInOut', delay: 0.45 }}
+            animate={{ x2: [33, 38, 33], y2: [72, 70, 72] }}
+            transition={{ duration: 0.5, repeat: Infinity, ease: 'easeInOut', delay: 0.37 }}
           />
-          {/* Hooves sparkle */}
-          <motion.circle cx="68" cy="70" r="2" fill="#FFD700" opacity="0.6"
-            animate={{ opacity: [0.3, 0.8, 0.3], scale: [0.8, 1.2, 0.8] }}
-            transition={{ duration: 0.6, repeat: Infinity }} />
-          {/* Red sash (áo) on horse */}
-          <path d="M42 28 Q50 24 58 28 Q50 32 42 28" fill="#D32F2F" opacity="0.5" />
+          {/* Hoof sparkles */}
+          <motion.circle cx="74" cy="74" r="2" fill="#FFD700" opacity="0.5"
+            animate={{ opacity: [0.2, 0.7, 0.2], scale: [0.8, 1.3, 0.8] }}
+            transition={{ duration: 0.5, repeat: Infinity }} />
+          <motion.circle cx="40" cy="74" r="2" fill="#FFD700" opacity="0.5"
+            animate={{ opacity: [0.2, 0.7, 0.2], scale: [0.8, 1.3, 0.8] }}
+            transition={{ duration: 0.5, repeat: Infinity, delay: 0.25 }} />
         </svg>
       </motion.div>
 
       {/* Majestic Xích Thố War Horse Shadow */}
       <motion.div
-        className="shadow-pulse mt-[-8px] z-0"
-        style={{
-          filter: 'blur(1px)',
-        }}
+        className="shadow-pulse mt-[-6px] z-0"
+        style={{ filter: 'blur(1.5px)' }}
       >
-        <svg width="180" height="45" viewBox="0 0 220 55" fill="none" opacity="0.22">
-          {/* Heroic war horse silhouette - much larger and more dramatic */}
-          {/* Body - powerful and muscular */}
-          <ellipse cx="110" cy="22" rx="50" ry="18" fill="#1a0000" />
-          {/* Neck - arched proudly */}
-          <path d="M150 15 Q158 -5 148 -15 Q145 -18 140 -12" stroke="#1a0000" strokeWidth="14" fill="#1a0000" strokeLinecap="round" />
-          {/* Head - noble profile */}
-          <ellipse cx="145" cy="-16" rx="14" ry="9" fill="#1a0000" />
-          {/* Ears - alert */}
-          <path d="M138 -26 L135 -34 L142 -26" fill="#1a0000" />
-          <path d="M142 -27 L141 -35 L147 -26" fill="#1a0000" />
+        <svg width="200" height="50" viewBox="0 0 240 60" fill="none" opacity="0.2">
+          {/* Heroic war horse silhouette */}
+          <ellipse cx="120" cy="24" rx="55" ry="20" fill="#1a0800" />
+          {/* Powerful neck */}
+          <path d="M165 16 Q172 -4 162 -16 Q158 -20 153 -14" stroke="#1a0800" strokeWidth="15" fill="#1a0800" strokeLinecap="round" />
+          {/* Noble head */}
+          <ellipse cx="158" cy="-18" rx="15" ry="10" fill="#1a0800" />
+          {/* Alert ears */}
+          <path d="M150 -28 L147 -36 L154 -28" fill="#1a0800" />
+          <path d="M154 -29 L153 -37 L160 -28" fill="#1a0800" />
           {/* Flowing mane */}
-          <path d="M148 -15 Q160 5 152 20 Q165 10 158 -2" fill="#1a0000" opacity="0.8" />
-          <path d="M146 -10 Q155 0 150 14 Q158 5 153 -4" fill="#1a0000" opacity="0.6" />
-          {/* Tail - flowing dramatically */}
-          <path d="M60 18 Q35 8 20 25 Q30 15 45 22" fill="#1a0000" opacity="0.7" />
-          <path d="M60 22 Q30 18 15 32 Q28 22 50 28" fill="#1a0000" opacity="0.5" />
-          <path d="M60 26 Q38 28 25 38 Q35 30 55 32" fill="#1a0000" opacity="0.3" />
+          <path d="M162 -16 Q174 4 166 22 Q178 12 172 -2" fill="#1a0800" opacity="0.8" />
+          <path d="M160 -12 Q170 0 164 16 Q172 6 167 -4" fill="#1a0800" opacity="0.6" />
+          {/* Dramatic tail */}
+          <path d="M65 20 Q38 10 22 28 Q34 16 50 24" fill="#1a0800" opacity="0.7" />
+          <path d="M65 24 Q32 20 18 35 Q32 24 55 30" fill="#1a0800" opacity="0.5" />
           {/* Powerful legs */}
-          <line x1="140" y1="38" x2="152" y2="54" stroke="#1a0000" strokeWidth="6" strokeLinecap="round" />
-          <line x1="130" y1="38" x2="125" y2="54" stroke="#1a0000" strokeWidth="6" strokeLinecap="round" />
-          <line x1="90" y1="38" x2="82" y2="54" stroke="#1a0000" strokeWidth="6" strokeLinecap="round" />
-          <line x1="80" y1="38" x2="70" y2="54" stroke="#1a0000" strokeWidth="6" strokeLinecap="round" />
-          {/* Armor suggestion on the shadow */}
-          <path d="M95 12 Q110 8 125 12 Q110 16 95 12" fill="#2a0000" opacity="0.4" />
+          <line x1="155" y1="42" x2="168" y2="58" stroke="#1a0800" strokeWidth="7" strokeLinecap="round" />
+          <line x1="142" y1="42" x2="138" y2="58" stroke="#1a0800" strokeWidth="7" strokeLinecap="round" />
+          <line x1="98" y1="42" x2="90" y2="58" stroke="#1a0800" strokeWidth="7" strokeLinecap="round" />
+          <line x1="85" y1="42" x2="75" y2="58" stroke="#1a0800" strokeWidth="7" strokeLinecap="round" />
+          {/* Armor silhouette */}
+          <path d="M100 14 Q120 10 140 14 Q120 18 100 14" fill="#2a0800" opacity="0.4" />
         </svg>
       </motion.div>
 
       {/* Ground line */}
-      <div className="w-48 h-[1px] bg-gradient-to-r from-transparent via-tet-gold/20 to-transparent mt-[-2px]" />
+      <div className="w-52 h-[1px] bg-gradient-to-r from-transparent via-tet-gold/25 to-transparent mt-[-2px]" />
+
+      {/* Caption */}
+      <motion.p
+        className="text-[10px] text-tet-gold/40 mt-1 tracking-wide"
+        style={{ fontFamily: 'Pattaya, serif' }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+      >
+        Tiểu Dã giấu bóng Xích Thố
+      </motion.p>
     </motion.div>
   );
 }

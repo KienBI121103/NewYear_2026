@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
+import HorseShadowBanner from '@/components/HorseShadowBanner';
 
 import type { SoundType } from '@/hooks/useSoundSystem';
 
@@ -327,6 +328,13 @@ export default function ShakingScreen({ onComplete, userName, onPlaySound }: Sha
           <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-[110px] h-4 rounded-b-xl bg-gradient-to-b from-amber-900 to-amber-950" />
         </motion.div>
       </div>
+
+      {/* Horse Shadow Banner - decorative below tube */}
+      {(phase === 'intro' || phase === 'shaking') && (
+        <div className="mt-4">
+          <HorseShadowBanner />
+        </div>
+      )}
 
       {/* Light rays during reveal */}
       <AnimatePresence>

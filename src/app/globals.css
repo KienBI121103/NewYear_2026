@@ -1,18 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Ma+Shan+Zheng&family=Dancing+Script:wght@400;600;700&family=Pattaya&family=Montserrat:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Dancing+Script:wght@400;600;700&family=Pattaya&family=Montserrat:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ===== WARM COLOR PALETTE (matching Ngựa Mã Tiểu Dã illustration) ===== */
 :root {
-  --tet-red: #D32F2F;
-  --tet-red-dark: #8B0000;
+  --tet-red: #CC2222;
+  --tet-red-dark: #8B1A1A;
   --tet-red-deep: #5C0000;
   --tet-gold: #FFD700;
   --tet-gold-light: #FFE44D;
   --tet-gold-dark: #B8860B;
   --tet-green: #2E7D32;
   --tet-cream: #FFF8E1;
+  --tet-amber: #D4A017;
+  --tet-warm-bg: #3A1A08;
+  --tet-warm-mid: #6B3A1A;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -22,9 +26,18 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Warm amber/golden background inspired by the horse illustration */
 body {
   font-family: 'Be Vietnam Pro', system-ui, sans-serif;
-  background: linear-gradient(170deg, #5C0000 0%, #8B0000 15%, #B71C1C 35%, #C62828 55%, #8B0000 80%, #5C0000 100%);
+  background: linear-gradient(170deg,
+    #2A0E04 0%,       /* deep warm brown */
+    #4A1A08 12%,       /* dark amber */
+    #6B2A10 28%,       /* warm brown-red */
+    #8B3A18 42%,       /* amber-red */
+    #7A2A10 58%,       /* warm deep */
+    #5A1A08 75%,       /* dark amber */
+    #3A0E04 100%       /* deep warm */
+  );
   min-height: 100vh;
   overflow-x: hidden;
   color: #FFF8E1;
@@ -33,19 +46,18 @@ body {
 
 /* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #5C0000; }
+::-webkit-scrollbar-track { background: #3A0E04; }
 ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #FFD700, #B8860B); border-radius: 3px; }
 
-/* ===== BG PATTERN WITH PHÚC / LỘC WATERMARK (Hình 2 & 4 style) ===== */
+/* ===== BG PATTERN WITH PHÚC / LỘC WATERMARK ===== */
 .bg-tet-pattern {
   background-image:
-    radial-gradient(circle at 15% 35%, rgba(255, 215, 0, 0.04) 0%, transparent 50%),
-    radial-gradient(circle at 85% 65%, rgba(255, 215, 0, 0.04) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.02) 0%, transparent 60%);
+    radial-gradient(circle at 15% 35%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 85% 65%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(212, 160, 23, 0.03) 0%, transparent 60%);
   position: relative;
 }
 
-/* Hidden Phúc watermark (Vietnamese) */
 .bg-tet-pattern::before {
   content: 'Phúc';
   position: fixed;
@@ -60,7 +72,6 @@ body {
   line-height: 1;
 }
 
-/* Hidden Lộc watermark (Vietnamese) */
 .bg-tet-pattern::after {
   content: 'Lộc';
   position: fixed;
@@ -75,7 +86,7 @@ body {
   transform: rotate(12deg);
 }
 
-/* ===== WAVE PATTERN (Hình 2 bottom wave) ===== */
+/* ===== WAVE PATTERN ===== */
 .wave-pattern {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath d='M0 60 Q180 0 360 60 Q540 120 720 60 Q900 0 1080 60 Q1260 120 1440 60 L1440 120 L0 120 Z' fill='rgba(255,215,0,0.06)'/%3E%3C/svg%3E");
   background-size: 100% 60px;
@@ -85,17 +96,17 @@ body {
 
 /* ===== GLASSMORPHISM CARDS ===== */
 .glass-card {
-  background: rgba(255, 248, 225, 0.07);
+  background: rgba(58, 26, 8, 0.6);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1.5px solid rgba(255, 215, 0, 0.18);
+  border: 1.5px solid rgba(255, 215, 0, 0.22);
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 rgba(255, 215, 0, 0.08);
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 215, 0, 0.1);
 }
 
 .glass-card-gold {
-  background: rgba(255, 215, 0, 0.06);
+  background: rgba(212, 160, 23, 0.08);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1.5px solid rgba(255, 215, 0, 0.25);
@@ -124,7 +135,6 @@ body {
   pointer-events: none;
 }
 
-/* Dragon-phoenix corner ornaments from 4 corners (Hình 4 style) */
 .fortune-card::after {
   content: '';
   position: absolute;
@@ -139,7 +149,7 @@ body {
   border-radius: inherit;
 }
 
-/* Dragon-phoenix frame for result */
+/* Dragon-phoenix emoji frame */
 .dragon-phoenix-frame { position: relative; }
 .dragon-phoenix-frame::before {
   content: '🐉';
@@ -166,17 +176,17 @@ body {
 
 /* ===== CALLIGRAPHY TEXT ===== */
 .text-calligraphy {
-  font-family: 'Ma Shan Zheng', 'Dancing Script', 'Playfair Display', serif;
+  font-family: 'Pattaya', 'Dancing Script', 'Playfair Display', serif;
   letter-spacing: 0.05em;
 }
 .text-calligraphy-poem {
-  font-family: 'Playfair Display', 'Ma Shan Zheng', serif;
+  font-family: 'Playfair Display', 'Pattaya', serif;
   font-style: italic;
   letter-spacing: 0.02em;
   line-height: 2;
 }
 .text-thu-phap {
-  font-family: 'Dancing Script', 'Ma Shan Zheng', serif;
+  font-family: 'Dancing Script', 'Pattaya', serif;
   font-weight: 700;
 }
 
@@ -197,7 +207,7 @@ body {
 
 /* ===== BUTTONS ===== */
 .btn-tet {
-  background: linear-gradient(135deg, #C62828 0%, #8B0000 100%);
+  background: linear-gradient(135deg, #CC2222 0%, #8B1A1A 100%);
   color: #FFD700;
   font-weight: 700;
   border-radius: 9999px;
@@ -253,9 +263,9 @@ body {
   box-shadow: 0 8px 35px rgba(255, 215, 0, 0.55), 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* ===== TOPIC CARDS - LIGHT BG + DARK TEXT FOR READABILITY ===== */
+/* ===== TOPIC CARDS - WHITE BG, DARK TEXT, EXTREME CONTRAST ===== */
 .topic-card {
-  background: linear-gradient(145deg, rgba(255, 248, 225, 0.92) 0%, rgba(255, 236, 179, 0.88) 100%);
+  background: rgba(255, 255, 255, 0.92);
   border: 2.5px solid rgba(184, 134, 11, 0.35);
   border-radius: 20px;
   padding: 20px 12px;
@@ -263,43 +273,45 @@ body {
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 .topic-card::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 30%, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle at 50% 30%, rgba(255, 215, 0, 0.12) 0%, transparent 70%);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 .topic-card:hover::before { opacity: 1; }
 .topic-card:hover {
-  background: linear-gradient(145deg, rgba(255, 248, 225, 0.98) 0%, rgba(255, 224, 130, 0.95) 100%);
+  background: rgba(255, 255, 255, 0.98);
   border-color: #FFD700;
   transform: translateY(-6px);
   box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3), 0 4px 15px rgba(0,0,0,0.15);
 }
 .topic-card.active {
-  background: linear-gradient(145deg, rgba(255, 248, 225, 1) 0%, rgba(255, 224, 130, 1) 100%);
+  background: rgba(255, 255, 255, 1);
   border-color: #FFD700;
   box-shadow: 0 0 25px rgba(255, 215, 0, 0.4), 0 0 50px rgba(255, 215, 0, 0.12), inset 0 0 15px rgba(255, 215, 0, 0.08);
 }
 .topic-card .topic-label {
-  color: #5C0000;
+  color: #8B1A1A;
   font-weight: 700;
+  font-family: 'Pattaya', 'Be Vietnam Pro', serif;
 }
 .topic-card .topic-desc {
-  color: rgba(92, 0, 0, 0.6);
+  color: rgba(60, 20, 0, 0.7);
+  font-weight: 500;
 }
 
-/* ===== HIGH-CONTRAST INPUTS (white opaque, gold border) ===== */
+/* ===== HIGH-CONTRAST INPUTS ===== */
 .input-tet {
-  background: rgba(255, 255, 255, 0.92);
-  border: 2.5px solid rgba(255, 215, 0, 0.6);
+  background: rgba(255, 255, 255, 0.95);
+  border: 2.5px solid rgba(255, 215, 0, 0.5);
   border-radius: 14px;
   padding: 14px 18px;
-  color: #3E0000;
+  color: #2A0E04;
   font-size: 1rem;
   font-weight: 500;
   transition: all 0.3s ease;
@@ -307,19 +319,17 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 .input-tet::placeholder {
-  color: rgba(139, 0, 0, 0.4);
+  color: rgba(100, 40, 10, 0.45);
   font-weight: 400;
 }
 .input-tet:focus {
   outline: none;
   border-color: #FFD700;
-  box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.2), 0 4px 12px rgba(255, 215, 0, 0.15);
+  box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.25), 0 4px 12px rgba(255, 215, 0, 0.15);
   background: white;
 }
-
-/* Select dropdown dark bg for options */
 .input-tet option {
-  background: #5C0000;
+  background: #3A1A08;
   color: #FFF8E1;
 }
 
@@ -418,7 +428,6 @@ body {
     inset 0 0 15px rgba(0, 0, 0, 0.5);
 }
 .vinyl-disc.spinning { animation: spinVinyl 3s linear infinite; }
-
 @keyframes spinVinyl {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -433,7 +442,7 @@ body {
   pointer-events: none;
 }
 .cau-doi-inner {
-  background: linear-gradient(180deg, #C62828 0%, #8B0000 100%);
+  background: linear-gradient(180deg, #CC2222 0%, #8B1A1A 100%);
   border: 2.5px solid #FFD700;
   border-radius: 0 0 22px 22px;
   padding: 16px 4px 24px;
@@ -443,9 +452,9 @@ body {
   align-items: center;
   gap: 2px;
   font-family: 'Pattaya', 'Dancing Script', serif;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   color: #FFD700;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6), 0 0 12px rgba(255, 215, 0, 0.25);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6), 0 0 14px rgba(255, 215, 0, 0.3);
   line-height: 1.4;
 }
 .cau-doi-inner span {
@@ -456,7 +465,7 @@ body {
 .cau-doi-left { left: 6px; }
 .cau-doi-right { right: 6px; }
 
-/* ===== CIRCULAR FRAME (Hình 2 style) ===== */
+/* ===== CIRCULAR FRAME ===== */
 .circular-frame {
   border-radius: 50%;
   border: 4px solid #FFD700;
@@ -467,13 +476,34 @@ body {
   position: relative;
   overflow: hidden;
 }
-.circular-frame::before {
+
+/* ===== HORSE MASCOT IMAGE ===== */
+.horse-mascot-container {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 60px rgba(255, 215, 0, 0.15),
+    inset 0 0 0 3px rgba(255, 215, 0, 0.2);
+  border: 3px solid rgba(255, 215, 0, 0.3);
+}
+.horse-mascot-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.horse-mascot-container::after {
   content: '';
   position: absolute;
-  inset: -2px;
-  border: 3px solid transparent;
-  border-image: repeating-conic-gradient(#FFD700 0deg 5deg, transparent 5deg 15deg) 2;
-  border-radius: 50%;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 60%,
+    rgba(58, 26, 8, 0.4) 85%,
+    rgba(58, 26, 8, 0.8) 100%
+  );
+  pointer-events: none;
 }
 
 /* ===== GOLD COIN ===== */
@@ -512,12 +542,6 @@ body {
 }
 .firecracker-burst { animation: firecrackerBurst 0.6s ease-out forwards; }
 
-@keyframes banhChungBounce {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25% { transform: translateY(-8px) rotate(-3deg); }
-  75% { transform: translateY(-4px) rotate(3deg); }
-}
-
 @keyframes hoaMaiSway {
   0%, 100% { transform: rotate(-5deg); }
   50% { transform: rotate(5deg); }
@@ -553,7 +577,7 @@ body {
 }
 .sparkle { animation: sparkle 2s ease-in-out infinite; }
 
-/* Cau doi gentle sway */
+/* Cau doi sway */
 @keyframes cauDoiSway {
   0%, 100% { transform: rotate(0deg); }
   25% { transform: rotate(0.5deg); }
@@ -642,6 +666,21 @@ body {
   border-color: #FFD700;
   color: #FFD700;
   box-shadow: 0 0 12px rgba(255, 215, 0, 0.2);
+}
+
+/* ===== WARM GLOW OVERLAY ===== */
+.warm-glow {
+  position: relative;
+}
+.warm-glow::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  right: -10%;
+  height: 40%;
+  background: radial-gradient(ellipse at center, rgba(255, 180, 50, 0.08) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 ::selection {
